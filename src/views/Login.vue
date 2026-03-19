@@ -39,7 +39,9 @@
     
 </template>
 <script lang="ts" setup>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonInput, IonButton, IonLabel, IonButtons } from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent,
+     IonItem, IonInput, IonButton, IonLabel,
+     IonButtons, alertController } from '@ionic/vue';
 import { useUserStore } from '@/stores/user';
 import { useRouter } from 'vue-router';
 
@@ -48,10 +50,13 @@ const router = useRouter();
 
 function handleLogin() {
     userStore.$login().then( res => {
-        console.log(res);
-
+        router.push({ name: 'Seccion' });
         }) .catch( error => {
-            console.error('login failed', error);
+           alertController.create({
+            header: 'Error de inicio de sesión',
+            message: error.response.data.message,
+            buttons: ['Continuar'],
+            }).then(alert => alert.present());
         });
 }
 </script>
