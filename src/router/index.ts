@@ -1,34 +1,41 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
-import TabsPage from '../views/TabsPage.vue'
+import BaseLayout from '@/layouts/BaseLayout.vue';
+
+const Login = () => import('@/views/Login.vue');
+const Registro = () => import('@/views/Registro.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/tabs/tab1'
+    redirect: '/seccion'
   },
+
+  { 
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { 
+      requiresAuth: false 
+    }
+  },
+  { 
+    path: '/registro',
+    name: 'Registro',
+    component: Registro,
+    meta: { 
+      requiresAuth: false 
+    }
+  },
+
   {
-    path: '/tabs/',
-    component: TabsPage,
-    children: [
-      {
-        path: '',
-        redirect: '/tabs/tab1'
-      },
-      {
-        path: 'tab1',
-        component: () => import('@/views/Tab1Page.vue')
-      },
-      {
-        path: 'tab2',
-        component: () => import('@/views/Tab2Page.vue')
-      },
-      {
-        path: 'tab3',
-        component: () => import('@/views/Tab3Page.vue')
-      }
-    ]
-  }
+    path: '/seccion',
+    component: BaseLayout,
+    meta: { 
+      requiresAuth: true 
+    },
+    
+  },
 ]
 
 const router = createRouter({
@@ -36,4 +43,12 @@ const router = createRouter({
   routes
 })
 
-export default router
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !localStorage.getItem('token')) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
+export default router;
