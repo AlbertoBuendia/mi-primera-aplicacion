@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import BaseLayout from '@/layouts/BaseLayout.vue';
 import { useUserStore } from '@/stores/user';
 
+
 const Login = () => import('@/views/Login.vue');
 const Registro = () => import('@/views/Registro.vue');
 
@@ -11,7 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     redirect: '/seccion'
   },  
-  
+
   { 
     path: '/login',
     name: 'Login',

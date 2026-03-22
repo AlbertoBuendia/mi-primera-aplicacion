@@ -26,6 +26,7 @@
                     class="ion-margin-top"
                     fill="outline"           
                     v-model="userStore.login.password"  
+                    @keyup.enter="handleLogin"
                     type="password"        
                     placeholder="Enter text">
                     
