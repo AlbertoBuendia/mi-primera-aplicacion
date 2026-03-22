@@ -17,7 +17,7 @@
                     class="ion-margin-top"
                     fill="outline" 
                     v-model="userStore.login.username"
-                    placeholder="Enter text">
+                    placeholder="Enter username">
                 </ion-input>
             </ion-item>
             <ion-item class="ion-margin-bottom" lines="none">
@@ -30,7 +30,7 @@
                     v-model="userStore.login.password"  
                     @keyup.enter="handleLogin"
                     type="password"        
-                    placeholder="Enter text">
+                    placeholder="Enter password" >
                     
                 </ion-input>
             </ion-item>

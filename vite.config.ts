@@ -1,4 +1,3 @@
-
 /// <reference types="vitest" />
 
 import legacy from '@vitejs/plugin-legacy'
