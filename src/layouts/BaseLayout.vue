@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-    import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter } from '@ionic/vue';
+import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter } from '@ionic/vue';
   import { IonAccordion, IonAccordionGroup, IonItem, IonLabel, IonList, IonAvatar, IonButton, IonRouterOutlet,
     IonMenuToggle, IonProgressBar   } from '@ionic/vue';
   import { useUserStore } from '@/stores/user';
@@ -76,7 +76,14 @@
     router.push('/login');
   }
 
-  contentStore.$getContent(route.params.name as string)
+   if(!contentStore.content.to && route.params.name){
+    contentStore.$getContent(route.params.name as string)
+  }
+  
+  if(!route.params.name){
+    contentStore.$getContent(contentStore.home.internal_name as string);
+    router.push( {path: '/'+contentStore.home.url })
+  }
   //comentario de prueba
 </script>
 
